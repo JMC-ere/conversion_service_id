@@ -1,0 +1,45 @@
+{
+  "PRD": {
+    "NUDGE_ADMIN_DB": {
+      "HOST" : "121.125.71.189",
+      "PORT" : 3306,
+      "DB_NAME" : "nudge_admin",
+      "USER" : "nudge_admin",
+      "PASSWORD" : "admin!#189"
+    },
+    "SERVICE_ID_DB": {
+      "HOST": "192.168.7.73:1521/btvdb",
+      "USER": "cssapp",
+      "PASSWORD": "csscdc6337!#1"
+    }
+  },
+  "STG": {
+    "NUDGE_ADMIN_DB": {
+      "HOST" : "1.255.144.64",
+      "PORT" : 3306,
+      "DB_NAME" : "nudge",
+      "USER" : "nudge_1",
+      "PASSWORD" : "0000"
+    },
+    "SERVICE_ID_DB": {
+      "HOST": "localhost:2541/BTVDB",
+      "USER": "HANAROCMS",
+      "PASSWORD": "hanarocms@!34"
+    },
+    "SERVICE_ID_DB1": {
+      "HOST": "192.168.180.20:1521/BTVDB",
+      "USER": "HANAROCMS",
+      "PASSWORD": "hanarocms@!34"
+    },
+    "TEST_SERVICE_ID_DB1": {
+      "HOST": "localhost:2541/TESTDOJDB",
+      "USER": "HANAROCMS",
+      "PASSWORD": "hanarocms@!34"
+    },
+    "TEST_SERVICE_ID_DB": {
+      "HOST": "192.168.145.254:1521/TESTDOJDB",
+      "USER": "HANAROCMS",
+      "PASSWORD": "hanarocms@!34"
+    }
+  }
+}

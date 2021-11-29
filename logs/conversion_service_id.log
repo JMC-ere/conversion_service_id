@@ -1,0 +1,15 @@
+[INFO|conversion_service_id.py:87] 2021-11-10 10:53:56,691 > ORACLE CONNECT ERROR : ORA-12541: TNS:no listener
+[INFO|conversion_service_id.py:154] 2021-11-10 10:54:18,393 > START CONVERSION SERVICE ID
+[INFO|conversion_service_id.py:120] 2021-11-10 10:54:18,475 > FIRST CONVERSION SERVICE ID COUNT : 1000건
+[INFO|conversion_service_id.py:157] 2021-11-10 10:54:18,476 > LOOP COUNT : 2건
+[INFO|conversion_service_id.py:134] 2021-11-10 10:54:19,551 > START MAPPING
+[INFO|conversion_service_id.py:134] 2021-11-10 10:54:19,551 > START MAPPING
+[INFO|conversion_service_id.py:138] 2021-11-10 10:54:19,840 > END MAPPING
+[INFO|conversion_service_id.py:138] 2021-11-10 10:54:19,840 > END MAPPING
+[INFO|conversion_service_id.py:139] 2021-11-10 10:54:19,840 > START UPDATE
+[INFO|conversion_service_id.py:139] 2021-11-10 10:54:19,841 > START UPDATE
+[INFO|conversion_service_id.py:143] 2021-11-10 10:54:26,156 > UPDATE COUNT : 500건
+[INFO|conversion_service_id.py:144] 2021-11-10 10:54:26,156 > END UPDATE
+[INFO|conversion_service_id.py:143] 2021-11-10 10:54:26,242 > UPDATE COUNT : 999건
+[INFO|conversion_service_id.py:144] 2021-11-10 10:54:26,242 > END UPDATE
+[INFO|conversion_service_id.py:166] 2021-11-10 10:54:26,328 > END CONVERSION SERVICE ID
