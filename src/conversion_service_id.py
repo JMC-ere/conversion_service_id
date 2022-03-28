@@ -72,15 +72,35 @@ def connect_oracle():
     # LOCATION = r"C:/instantclient_19_10"
     # os.environ["PATH"] = LOCATION + ";" + os.environ["PATH"]  # 환경변수 등록
 
-    o_info = read_config()['TEST_SERVICE_ID_DB']
+    o_info = read_config()['SERVICE_ID_DB']
     print(o_info)
     try:
-        oracle_conn = cx_Oracle.connect(
-            user = o_info['USER'],
-            password = o_info['PASSWORD'],
-            dsn = o_info['HOST'],
-            encoding="UTF-8"
-        )
+        if state == 'PRD':
+            dns_str = f"""(DESCRIPTION=
+                                (FAILOVER=on)
+                                (ADDRESS_LIST=
+                                    (ADDRESS=(PROTOCOL=tcp)(HOST=192.168.5.67)(PORT=1521))
+                                    (ADDRESS=(PROTOCOL=tcp)(HOST=192.168.5.68)(PORT=1521))
+                                )
+                                (CONNECT_DATA=(SERVICE_NAME=PBTVDB))
+                            )"""
+
+            oracle_conn = cx_Oracle.connect(
+                user=o_info['USER'],
+                password=o_info['PASSWORD'],
+                dsn=dns_str,
+                encoding="UTF-8"
+            )
+        elif state == 'STG':
+            oracle_conn = cx_Oracle.connect(
+                user=o_info['USER'],
+                password=o_info['PASSWORD'],
+                dsn=o_info['HOST'],
+                encoding="UTF-8"
+            )
+        else:
+            oracle_conn = ''
+            log_txt.info(f'WRONG STATE')
 
         return oracle_conn
 
@@ -148,23 +168,26 @@ def mapping_service_id(service_nums, count):
 
 
 if __name__ == '__main__':
-    global o_conn, o_curs
-    o_conn = connect_oracle()
-    o_curs = o_conn.cursor()
-    manager = multiprocessing.Manager()
-    mul_dict = manager.dict()
-    mul_dict['count'] = 0
-    log_txt.info(f'START CONVERSION SERVICE ID')
-    pool = Pool(processes=8)
-    list_service_num = list_chunk(get_service_id(), 500)
-    log_txt.info(f'LOOP COUNT : {len(list_service_num)}건')
-    time.sleep(2)
-    for i in list_service_num:
-        pool.apply_async(mapping_service_id, args=(i, mul_dict))
-        time.sleep(1)
+    try:
+        global o_conn, o_curs
+        o_conn = connect_oracle()
+        o_curs = o_conn.cursor()
+        manager = multiprocessing.Manager()
+        mul_dict = manager.dict()
+        mul_dict['count'] = 0
+        log_txt.info(f'START CONVERSION SERVICE ID')
+        pool = Pool(processes=8)
+        list_service_num = list_chunk(get_service_id(), 500)
+        log_txt.info(f'LOOP COUNT : {len(list_service_num)}건')
+        time.sleep(2)
+        for i in list_service_num:
+            pool.apply_async(mapping_service_id, args=(i, mul_dict))
+            time.sleep(1)
 
-    pool.close()
-    pool.join()
-    m_conn.close()
-    o_conn.close()
-    log_txt.info(f'END CONVERSION SERVICE ID')
+        pool.close()
+        pool.join()
+        m_conn.close()
+        o_conn.close()
+        log_txt.info(f'END CONVERSION SERVICE ID')
+    except Exception as err:
+        log_txt.info(f'ERROR : {err}')

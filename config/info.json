@@ -8,7 +8,10 @@
       "PASSWORD" : "admin!#189"
     },
     "SERVICE_ID_DB": {
-      "HOST": "192.168.7.73:1521/btvdb",
+      "HOST_1": "192.168.7.73:1521",
+      "HOST_2": "192.168.7.74:1521",
+      "PORT": 1521,
+      "NAME": "btvdb",
       "USER": "cssapp",
       "PASSWORD": "csscdc6337!#1"
     }
